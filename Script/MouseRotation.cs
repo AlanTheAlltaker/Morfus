@@ -8,18 +8,25 @@ public class MouseRotation : NetworkBehaviour
     [SerializeField] Transform playerBody;
     [SerializeField] float mouseSensitivity = 600f;
     float xRotation = 0f;
+    [SerializeField] GameObject cameraPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+        cameraPlayer.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) { 
-            return; 
+        if (!IsOwner)
+        {
+            return;
         }
         MouseeRotation();
     }
