@@ -19,7 +19,15 @@ public class ChangeTeamCube : NetworkBehaviour, IInteractable
         if (NetworkManager.ConnectedClients.ContainsKey(clientId))
         {
             var client = NetworkManager.ConnectedClients[clientId];
-            NetworkObject player = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject;
+            NetworkObject player = client.PlayerObject;
+            ChangeMaterialClientRpc(player);
+        }
+    }
+    [ClientRpc]
+    public void ChangeMaterialClientRpc(NetworkObjectReference target)
+    {
+        if (target.TryGet(out NetworkObject player))
+        {
             Renderer playerRenderer = player.GetComponent<Renderer>();
             TagsManager tagsManager = player.GetComponent<TagsManager>();
             if (tagsManager.tagsList.Contains("Blue") && !tagsManager.tagsList.Contains("Red"))
@@ -29,7 +37,8 @@ public class ChangeTeamCube : NetworkBehaviour, IInteractable
                 Debug.Log("Dodano Red dla gracza");
 
                 playerRenderer.material = red;
-            } else if (tagsManager.tagsList.Contains("Red") && !tagsManager.tagsList.Contains("Blue"))
+            }
+            else if (tagsManager.tagsList.Contains("Red") && !tagsManager.tagsList.Contains("Blue"))
             {
                 tagsManager.tagsList.Add("Blue");
                 tagsManager.tagsList.Remove("Red");
