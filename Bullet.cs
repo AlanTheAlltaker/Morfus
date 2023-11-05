@@ -8,14 +8,12 @@ public class Bullet : NetworkBehaviour
     [SerializeField] float life = 2f;
     [SerializeField] float bulletSpeed = 2f;
 
+    bool dealtDamage = false;
 
-    void Update()
+
+    void Awake()
     {
-        life -= Time.deltaTime;
-        if (life <= 0 )
-        {
-            DestroyServerRpc();
-        }
+        Invoke(nameof(DestroyServerRpc), 3f);
     }
     public override void OnNetworkSpawn()
     {
@@ -26,13 +24,18 @@ public class Bullet : NetworkBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Player(Clone)")
+        if (collision.gameObject.GetComponent<HealthDamage>() && !dealtDamage)
         {
-            DestroyServerRpc();
+            //collision.gameObject.GetComponent<HealthDamage>().hp -= 20f;
+            //Debug.Log("pozosta³o " + collision.gameObject.GetComponent<HealthDamage>().hp);
+            //dealtDamage = true;
+            //Invoke(nameof(DestroyServerRpc), 0.15f);
+            //DestroyServerRpc();
         }
+        //GetComponent<Rigidbody>().velocity = this.transform.up + this.transform.forward * bulletSpeed;
     }
     [ServerRpc(RequireOwnership = false)]
-    void DestroyServerRpc()
+    public void DestroyServerRpc()
     {
        gameObject.GetComponent<NetworkObject>().Despawn();
     }
