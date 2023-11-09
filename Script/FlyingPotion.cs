@@ -6,40 +6,68 @@ using UnityEngine;
 public class FlyingPotion : NetworkBehaviour
 {
     [SerializeField] Flying fly;
-    [SerializeField] Transform potionHolder;
+    [SerializeField] Movement movement;
+    [SerializeField] PotionHolder potionHolder;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform droper;
+
+    public override void OnNetworkSpawn()
     {
-        
+        base.OnNetworkSpawn();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !movement.isGrounded)
         {
             fly.flyingEffect = true;
-            transform.SetParent(null);
-            GetComponent<FlyingPotion>().enabled = false;
+            FPServerRpc();
+            HideServerRpc(false);
+
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ShootServerRpc(droper.position, gameObject.transform.rotation);
+            FPServerRpc();
+            HideServerRpc(false);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    [ServerRpc(RequireOwnership = false)]
+    void ShootServerRpc(Vector3 position, Quaternion rotation)
     {
-        if (collision.gameObject.GetComponent<Flying>())
+        GameObject bullet = Instantiate(bulletPrefab, position, rotation);
+        bullet.GetComponent<NetworkObject>().Spawn();
+    }
+    public void Destroy()
+    {
+        if (IsServer)
         {
-            //fly = collision.gameObject.GetComponent<Flying>();
-
-            //Transform player = collision.gameObject.transform;
-
-            //Transform potionHolder = player.GetChild(0).gameObject.transform;
-
-            transform.SetParent(potionHolder);
-            transform.localRotation = Quaternion.Euler(Vector3.zero);
-            transform.localPosition = Vector3.zero;
-            GetComponent<FlyingPotion>().enabled = true;
+            gameObject.GetComponent<NetworkObject>().Despawn();
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void HideServerRpc(bool gunCannonB)
+    {
+        HideClientRpc(gunCannonB);
+    }
+    [ClientRpc]
+    void HideClientRpc(bool gunCannonB)
+    {
+        gameObject.SetActive(gunCannonB);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void FPServerRpc()
+    {
+        FPClientRpc();
+    }
+    [ClientRpc]
+    void FPClientRpc()
+    {
+        potionHolder.fP = false;
     }
 
 }
