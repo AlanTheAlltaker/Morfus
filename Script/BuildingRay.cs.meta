@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e697269bc26305e47bb7b9f3ad76d26d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {fileID: 2572056083546693923, guid: ba13fcec7cbb6e343bce0eeca682c637, type: 3}
+  - structureGhost: {instanceID: 0}
+  - strucutre: {instanceID: 0}
+  - InteractorSource: {instanceID: 0}
+  - itemToDrop: {instanceID: 0}
+  - droper: {instanceID: 0}
+  - structureHolder: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
