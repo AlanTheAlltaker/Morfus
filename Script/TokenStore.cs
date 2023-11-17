@@ -20,7 +20,7 @@ public class TokenStore : NetworkBehaviour
         {
             if (!IsServer) { return; }
             tokens.Value += 1;
-            Debug.Log("Posiadasz" + tokens.Value + " tokenów");
+            Debug.Log("Posiadasz" + tokens.Value + " tokenï¿½w");
         }
     }
 }
