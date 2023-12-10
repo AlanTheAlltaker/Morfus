@@ -16,7 +16,6 @@ Library: C:\Users\Alan\Morfus\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_gen
 --assembly-defines=Unity.Networking.Transport;
 --assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.Netcode.Components;
---assembly-defines=NaughtyAttributes.Test;
 --assembly-defines=Unity.Services.Core.Scheduler;
 --assembly-defines=Unity.Services.Core.Environments;
 --assembly-defines=Unity.Services.Relay;
@@ -27,7 +26,6 @@ Library: C:\Users\Alan\Morfus\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_gen
 --assembly-defines=SimpleRelay;
 --assembly-defines=Unity.TextMeshPro;
 --assembly-defines=Unity.Services.Core.Analytics;
---assembly-defines=NaughtyAttributes.Core;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.Services.Core.Internal;
 --assembly-defines=Unity.Services.Core.Device;
@@ -177,7 +175,6 @@ Library: C:\Users\Alan\Morfus\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_gen
 --assembly-defines=Unity.Networking.Transport;
 --assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.Netcode.Components;
---assembly-defines=NaughtyAttributes.Test;
 --assembly-defines=Unity.Services.Core.Scheduler;
 --assembly-defines=Unity.Services.Core.Environments;
 --assembly-defines=Unity.Services.Relay;
@@ -188,7 +185,6 @@ Library: C:\Users\Alan\Morfus\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_gen
 --assembly-defines=SimpleRelay;
 --assembly-defines=Unity.TextMeshPro;
 --assembly-defines=Unity.Services.Core.Analytics;
---assembly-defines=NaughtyAttributes.Core;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.Services.Core.Internal;
 --assembly-defines=Unity.Services.Core.Device;
